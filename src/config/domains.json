@@ -1,0 +1,4 @@
+[
+    {"name" : "amazon.com", "isDynamic": true},
+    {"name" : "flipkart.com", "isDynamic" : true}
+]

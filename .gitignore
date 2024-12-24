@@ -6,3 +6,4 @@ node_modules/
 
 # Logs
 src/output/logs/
+src/output/results.json
