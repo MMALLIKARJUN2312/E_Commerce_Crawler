@@ -1,31 +1,21 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
+const { logger } = require('../utils/logger');
 
-const cheerioCrawler = async (domain) => {
-    console.log(`Crawling ${domain} using Cheerio`);
+async function crawlStaticSite(url) {
+  try {
+    const { data } = await axios.get(url);
+    const $ = cheerio.load(data);
+    const productUrls = [];
+    $('a[href*="/product/"]').each((index, element) => {
+      productUrls.push($(element).attr('href'));
+    });
+    logger.info(`Found ${productUrls.length} product URLs on ${url}`);
+    return productUrls;
+  } catch (err) {
+    logger.error(`Error crawling ${url}: ${err.message}`);
+    return [];
+  }
+}
 
-    try {
-        const response = await axios.get(`https://${domain}`, {
-            headers: {
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36',
-            },
-        });
-
-        const $ = cheerio.load(response.data);
-        const productLinks = [];
-
-        $('a[href]').each((_, element) => {
-            const url = $(element).attr('href');
-            if (url && url.includes('/dp/') || url.includes('/p/')) {
-                productLinks.push(`https://${domain}${url}`);
-            }
-        });
-
-        return [...new Set(productLinks)];
-    } catch (error) {
-        console.error(`Error crawling ${domain} with Cheerio: ${error.message}`);
-        return [];
-    }
-};
-
-module.exports = cheerioCrawler;
+module.exports = { crawlStaticSite };

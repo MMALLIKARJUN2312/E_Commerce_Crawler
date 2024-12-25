@@ -1,4 +1,10 @@
 [
-    {"name" : "amazon.com", "isDynamic": true},
-    {"name" : "flipkart.com", "isDynamic" : true}
+  {
+    "url": "https://www.amazon.com",
+    "isDynamic": true
+  },
+  {
+    "url": "https://www.flipkart.com",
+    "isDynamic": true
+  }
 ]

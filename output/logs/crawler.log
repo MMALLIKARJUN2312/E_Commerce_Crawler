@@ -1,0 +1,86 @@
+[2024-12-25T10:32:58.357Z] [INFO] Server is running on port 5000
+[2024-12-25T10:33:15.939Z] [INFO] Server is running on port 5000
+[2024-12-25T10:33:20.024Z] [INFO] Starting the crawling process...
+[2024-12-25T10:33:20.024Z] [INFO] Crawling domain: Amazon
+[2024-12-25T10:33:20.026Z] [ERROR] Error while crawling Amazon: crawler is not a function
+[2024-12-25T10:33:20.026Z] [INFO] Crawling domain: Flipkart
+[2024-12-25T10:33:20.027Z] [INFO] Using Cheerio for: https://www.flipkart.com
+[2024-12-25T10:33:20.800Z] [INFO] Crawling completed for Flipkart. Found 1 product URLs.
+[2024-12-25T10:33:20.801Z] [INFO] Results saved to results.json
+[2024-12-25T10:33:21.877Z] [INFO] Server is running on port 5000
+[2024-12-25T10:53:26.515Z] [INFO] Server is running on port 5000
+[2024-12-25T10:53:33.891Z] [INFO] Server is running on port 5000
+[2024-12-25T10:53:43.631Z] [INFO] Server is running on port 5000
+[2024-12-25T10:54:24.714Z] [INFO] Server is running on port 5000
+[2024-12-25T10:54:28.449Z] [INFO] Server is running on port 5000
+[2024-12-25T10:54:55.266Z] [INFO] Server is running on port 5000
+[2024-12-25T10:55:19.034Z] [INFO] Server is running on port 5000
+[2024-12-25T10:55:22.526Z] [INFO] Server is running on port 5000
+[2024-12-25T10:55:40.835Z] [INFO] Server is running on port 5000
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}
+{"level":"info","message":"Starting crawl for domain: https://www.amazon.com"}
+{"level":"info","message":"Using Puppeteer for dynamic site: https://www.amazon.com"}
+{"level":"info","message":"Found 0 product URLs on https://www.amazon.com"}
+{"level":"info","message":"Starting crawl for domain: https://www.flipkart.com"}
+{"level":"info","message":"Using Puppeteer for dynamic site: https://www.flipkart.com"}
+{"level":"info","message":"Found 0 product URLs on https://www.flipkart.com"}
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}
+{"level":"info","message":"Starting crawl for domain: https://www.amazon.com"}
+{"level":"info","message":"Using Puppeteer for dynamic site: https://www.amazon.com"}
+{"level":"info","message":"Found 187 product URLs on https://www.amazon.com"}
+{"level":"info","message":"Starting crawl for domain: https://www.flipkart.com"}
+{"level":"info","message":"Using Puppeteer for dynamic site: https://www.flipkart.com"}
+{"level":"error","message":"Error crawling https://www.flipkart.com: Waiting for selector `a[href*=\"/product/\"], a[href*=\"/dp/\"], a[href*=\"/item/\"]` failed: Waiting failed: 60000ms exceeded"}
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}
+{"level":"info","message":"Starting crawl for all domains..."}
+{"level":"info","message":"Starting crawl for domain: https://www.amazon.com"}
+{"level":"info","message":"Found 186 product URLs on https://www.amazon.com"}
+{"level":"info","message":"Successfully crawled https://www.amazon.com and found 186 product URLs."}
+{"level":"info","message":"Starting crawl for domain: https://www.flipkart.com"}
+{"level":"info","message":"Found 70 product URLs on https://www.flipkart.com"}
+{"level":"info","message":"Successfully crawled https://www.flipkart.com and found 70 product URLs."}
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}
+{"level":"info","message":"Crawler service is running at http://localhost:3000"}

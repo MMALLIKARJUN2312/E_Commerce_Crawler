@@ -1,17 +1,41 @@
-const puppeteerCrawler = require('./puppeteerCrawler');
-const cheerioCrawler = require('./cheerioCrawler');
-const domains = require('../config/domains.json');
+const { crawlDynamicSite } = require('./puppeteerCrawler');
+const { saveResultsToFile } = require('../utils/fileHandler');
+const { logger } = require('../utils/logger');
 
-const crawlerManager = {
-    startCrawling : async () => {
-        const results = {};
-        for (const domain of domains) {
-            const {name, isDynamic} = domain;
-            const crawler = isDynamic ? puppeteerCrawler : cheerioCrawler;
-            results[name] = await crawler(name);
-        }
-        return results;
-    },
-};
+async function crawlWebsite(url, isDynamic) {
+  let productUrls = [];
 
-module.exports = crawlerManager;
+  if (isDynamic) {
+    productUrls = await crawlDynamicSite(url);
+  } else {
+  }
+
+  if (productUrls.length > 0) {
+    logger.info(`Successfully crawled ${url} and found ${productUrls.length} product URLs.`);
+  } else {
+    logger.warn(`No product URLs found for ${url}.`);
+  }
+
+  return productUrls;
+}
+
+async function startCrawl(domains) {
+  const results = {};  
+
+  for (const domain of domains) {
+    try {
+      logger.info(`Starting crawl for domain: ${domain.url}`);
+      const productUrls = await crawlWebsite(domain.url, domain.isDynamic);  
+      results[domain.url] = productUrls; 
+    } catch (error) {
+      logger.error(`Failed to crawl ${domain.url}: ${error.message}`);
+      results[domain.url] = [];  
+    }
+  }
+
+  saveResultsToFile(results);
+
+  return results; 
+}
+
+module.exports = { startCrawl, crawlWebsite };

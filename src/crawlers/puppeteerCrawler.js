@@ -1,71 +1,49 @@
 const puppeteer = require('puppeteer-extra');
-const StealthPlugin = require('puppeteer-extra-plugin-stealth');
+const stealthPlugin = require('puppeteer-extra-plugin-stealth');
+const { logger } = require('../utils/logger');
 
-puppeteer.use(StealthPlugin());
+puppeteer.use(stealthPlugin());
 
-const puppeteerCrawler = async (domain) => {
-    console.log(`Crawling ${domain} using Puppeteer`);
+async function crawlDynamicSite(url) {
+  let browser;
+  try {
+    browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox'] });
 
-    try {
-        const browser = await puppeteer.launch({
-            headless: true,
-            args: ['--no-sandbox', '--disable-setuid-sandbox'],
-        });
-        const page = await browser.newPage();
+    const page = await browser.newPage();
 
-        await page.setUserAgent(
-            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36'
-        );
+    await page.setUserAgent(
+      'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+    );
 
-        await page.goto(`https://${domain}`, { waitUntil: 'domcontentloaded', timeout: 30000 });
+    await page.goto(url, { waitUntil: 'networkidle2', timeout: 60000 });
 
-        await autoScroll(page);
+    const productSelector = url.includes('flipkart.com')
+      ? 'a[href*="/product/"], a[href*="/p/"], a[href*="/dp/"]'  
+      : 'a[href*="/product/"], a[href*="/dp/"], a[href*="/item/"]'; 
 
-        const selectors = [
-            'a[href*="/dp/"]', 
-            'a[href*="/product/"]',
-            'a[href*="/p/"]', 
-        ];
+    await page.waitForSelector(productSelector, { timeout: 60000 });
 
-        let productLinks = [];
-        for (const selector of selectors) {
-            try {
-                await page.waitForSelector(selector, { timeout: 15000 });
-                const links = await page.evaluate((sel) => {
-                    return Array.from(document.querySelectorAll(sel)).map((link) => link.href);
-                }, selector);
-                productLinks.push(...links);
-            } catch (err) {
-                console.warn(`Selector ${selector} not found on ${domain}: ${err.message}`);
-            }
+    const productUrls = await page.evaluate((selector) => {
+      const urls = [];
+      const productLinks = document.querySelectorAll(selector);
+      productLinks.forEach(link => {
+        if (link.href) {
+          urls.push(link.href);
         }
+      });
+      return urls;
+    }, productSelector);
 
-        productLinks = [...new Set(productLinks)];
-
-        await browser.close();
-        return productLinks;
-    } catch (error) {
-        console.error(`Error crawling ${domain} with Puppeteer: ${error.message}`);
-        return [];
+    logger.info(`Found ${productUrls.length} product URLs on ${url}`);
+    return productUrls;
+  } catch (error) {
+    logger.error(`Error crawling ${url}: ${error.message}`);
+    return [];  
+  } finally {
+    if (browser) {
+      await browser.close();
     }
-};
+  }
+}
 
-const autoScroll = async (page) => {
-    await page.evaluate(async () => {
-        await new Promise((resolve) => {
-            let totalHeight = 0;
-            const distance = 100;
-            const timer = setInterval(() => {
-                const scrollHeight = document.body.scrollHeight;
-                window.scrollBy(0, distance);
-                totalHeight += distance;
-                if (totalHeight >= scrollHeight) {
-                    clearInterval(timer);
-                    resolve();
-                }
-            }, 100);
-        });
-    });
-};
-
-module.exports = puppeteerCrawler;
+module.exports = { crawlDynamicSite };
