@@ -18,8 +18,8 @@ async function crawlDynamicSite(url) {
     await page.goto(url, { waitUntil: 'networkidle2', timeout: 60000 });
 
     const productSelector = url.includes('flipkart.com')
-      ? 'a[href*="/product/"], a[href*="/p/"], a[href*="/dp/"]'  
-      : 'a[href*="/product/"], a[href*="/dp/"], a[href*="/item/"]'; 
+      ? 'a[href*="/product/"], a[href*="/p/"], a[href*="/dp/"]' 
+      : 'a[href*="/product/"], a[href*="/dp/"], a[href*="/item/"]';
 
     await page.waitForSelector(productSelector, { timeout: 60000 });
 
@@ -38,7 +38,7 @@ async function crawlDynamicSite(url) {
     return productUrls;
   } catch (error) {
     logger.error(`Error crawling ${url}: ${error.message}`);
-    return [];  
+    return []; 
   } finally {
     if (browser) {
       await browser.close();
