@@ -20,7 +20,6 @@ This project is designed to scale for large e-commerce websites and ensures effi
 - **Scalability**: Can handle hundreds of domains and large website hierarchies.
 - **Logging**: Logs activity using **Winston** to track crawling status and errors.
 - **Result Storage**: Saves the results in **JSON format** (`results.json`) and logs the activities in **crawler.log**.
-- **Parallel Execution**: The crawler is designed to execute in parallel to minimize runtime.
 
 ---
 
@@ -47,8 +46,8 @@ npm -v
 Start by cloning the repository:
 
 ```bash
-git clone https://github.com/your-username/ecommerce-crawler.git
-cd ecommerce-crawler
+git clone https://github.com/MMALLIKARJUN2312/E_Commerce_Crawler.git
+cd E_Commerce_Crawler
 ```
 
 ### 2. Install Dependencies
@@ -56,7 +55,7 @@ cd ecommerce-crawler
 Install all the required dependencies:
 
 ```bash
-npm install
+npm install axios cheerio dotenv express puppeteer puppeteer-extra-stealth-plugin uuid winston
 ```
 
 This will install the necessary packages including Puppeteer, Cheerio, Express, Winston, and others.
@@ -99,7 +98,7 @@ ecommerce-crawler/
 │   │   ├── results.json         # Discovered product URLs stored as JSON
 │   │   └── logs/                # Folder to store crawler logs
 │   │       └── crawler.log          # Log file with detailed crawler activities
-│   └── server.js            # Main server file for running the Express app
+│   └── app.js            # Main server file for running the Express app
 ├── .env                    # Root environment file for deployment
 ├── .gitignore              # Ignore unnecessary files like node_modules, .env, logs, etc.
 ├── package.json            # Node.js package configuration file
@@ -127,24 +126,24 @@ This will start the application on the port defined in your `.env` file (default
 
 You can trigger the crawl via a simple HTTP GET request.
 
-- **URL**: `http://localhost:3000/start-crawl`
+- **URL**: `http://localhost:3000/crawl`
 - **Method**: `GET`
 - **Response**: A JSON response indicating the status of the crawl for each domain.
 
 Example:
 
 ```bash
-curl http://localhost:3000/start-crawl
+postman http://localhost:3000/crawl
 ```
 
 Response:
 
 ```json
 {
-  "message": "Crawl complete",
+  "message": "Crawl completed",
   "domains": {
-    "https://www.amazon.com": ["https://www.amazon.com/product/12345", "https://www.amazon.com/product/67890"],
-    "https://www.flipkart.com": ["https://www.flipkart.com/product/23456"]
+    "https://www.amazon.com": ["https://www.amazon.com/product/12345", "https://www.amazon.com/product/67890", "... and others"],
+    "https://www.flipkart.com": ["https://www.flipkart.com/product/23456", "... and others"]
   }
 }
 ```
@@ -248,7 +247,7 @@ npm update
 
 ## Contributing
 
-We welcome contributions! If you’d like to contribute to the project, feel free to fork the repository and create a pull request. Here are a few ways you can help:
+I welcome contributions! If you’d like to contribute to the project, feel free to fork the repository and create a pull request. Here are a few ways you can help:
 
 - **Bug Fixes**: If you encounter a bug, feel free to open an issue and, if you can, submit a pull request with a fix.
 - **Feature Requests**: If you have ideas for new features, submit them as issues or pull requests.
